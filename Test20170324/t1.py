@@ -12,7 +12,7 @@ from wxpy import *
 
 logging.basicConfig(level=logging.INFO)
 
-bot = Bot(True)
+bot = Bot(cache_path=True)
 
 card_msg = None
 no_card_notice = '名片尚未确认，请手动发送到文件传输助手'
@@ -21,6 +21,7 @@ no_card_notice = '名片尚未确认，请手动发送到文件传输助手'
 # 第一步: 手动向自己的文件传输助手发送一次所需的名片
 @bot.register(bot.file_helper, CARD, except_self=False)
 def get_card_msg_to_send(msg):
+    print(msg.card)
     global card_msg
     logging.info('获得了名片: {}'.format(msg.card.name))
     card_msg = msg

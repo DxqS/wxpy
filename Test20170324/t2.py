@@ -7,7 +7,8 @@ Created on 2017/3/26.
 from xml.etree import ElementTree as ETree
 from wxpy import *
 
-bot = Bot()
+bot = Bot(cache_path=True)
+
 
 @bot.register(msg_types=NOTE)
 def get_revoked(msg):
