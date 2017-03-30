@@ -9,3 +9,5 @@ import time
 
 HOUR = time.strftime("%H", time.localtime(int(time.time())))
 print(type(HOUR))
+import  random
+print()
