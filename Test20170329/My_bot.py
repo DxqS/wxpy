@@ -46,6 +46,23 @@ def report_uptime():
         remote_admin.send(uptime())
 
 
+def special_day():
+    SpecialDay = time.mktime(time.strptime("2017-5-10", "%Y-%m-%d"))
+    live_time = SpecialDay - int(time.time())
+    days = int(live_time) // (3600 * 24)
+    hour = int(live_time - days * 3600 * 24) // 3600
+    return "亲爱的，距离宝贝生日只剩下{}天{}小时".format(days, hour)
+
+
+def report_special_day():
+    HOUR = int(time.strftime("%H", time.localtime(ts)))
+    if HOUR == 9:
+        remote_admin.send(special_day())
+        time.sleep(24 * 60 * 60)
+
+
 report_thread = Thread(target=report_uptime(), daemon=True)
 report_thread.start()
+report_special_thread = Thread(target=report_special_day(), daemon=True)
+report_special_thread.start()
 bot.join()
